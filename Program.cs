@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SkiaSharp;
 
 
 // See https://aka.ms/new-console-template for more information
@@ -31,30 +32,58 @@ MyMap.Zones.Add(new MapZone(){
 
 Console.WriteLine($"Map \"{MyMap.Name}\" has {MyMap.Zones.Count} zones");
 
-MyMap.ExportMapPNG("mymap.png");
 
 
-//create a place to store a bunch of terrain objects
-var TerrainList = new List<Terrain>();
-
-//generate and add terrain object so the list
-for(int x = 0; x < 20; x++){
+//MyMap.ExportMapPNG("mymap.png");
 
 
-   //generate random terrain
-    var myruins = new Terrain();
 
-    myruins.TerrainType = TerrainType.Barrier;
-
-    TerrainList.Add(myruins);
-
-
-}
+//test shapes
+var sz = new Size(){
+ Width=36,
+ Height=48
+};
 
 
-foreach(var item in TerrainList){
 
-Console.WriteLine($"My example terrain object : {item.TerrainType}");
 
+var shapes = new List<Shape>();
+
+shapes.Add(new Shape(){
+      Type= ShapeType.box,
+      position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 1,Size.InchesToPixelsMultiplier * 1),
+      Width = Size.InchesToPixelsMultiplier * 4,
+      Height= Size.InchesToPixelsMultiplier * 1}
+      );
+
+shapes.Add(new Shape(){
+      Type= ShapeType.box,
+      position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 1,Size.InchesToPixelsMultiplier * 6),
+      Width = Size.InchesToPixelsMultiplier * 1,
+      Height=Size.InchesToPixelsMultiplier * 4}
+      );
+
+
+shapes.Add(new Shape(){
+      Type= ShapeType.t_shape,
+      //start point
+      position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 1,Size.InchesToPixelsMultiplier * 9),
+      Width = Size.InchesToPixelsMultiplier * 4,
+      Height= Size.InchesToPixelsMultiplier * 1}
+      );
+
+
+var img = DrawingHelper.CreateImage(400,800);
+
+using(var sfc = DrawingHelper.CreateSurface(img)){
+
+      //set a global background color
+      sfc.Canvas.Clear(SKColors.White);
+
+      DrawingHelper.DrawGrid(img,sfc, SKColors.Gray);
+      
+      DrawingHelper.DrawShapes(sfc ,shapes);
+
+      DrawingHelper.WritePNG(sfc,"drawshapestest.png");    
 }
 
