@@ -67,14 +67,14 @@ shapes.Add(new Shape(){
       //start point
       position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 1,Size.InchesToPixelsMultiplier * 9),
       Width = Size.InchesToPixelsMultiplier * 4,
-      Height= Size.InchesToPixelsMultiplier * 1}
+      Height= Size.InchesToPixelsMultiplier * 7}
       );
 
 shapes.Add(new Shape(){
       Type= ShapeType.u_shape,
       //start point
       position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 15,Size.InchesToPixelsMultiplier * 1),
-      Width = Size.InchesToPixelsMultiplier * 4,
+      Width = Size.InchesToPixelsMultiplier * 3,
       Height= Size.InchesToPixelsMultiplier * 9}
       );
 
@@ -86,16 +86,20 @@ shapes.Add(new Shape(){
       Height= Size.InchesToPixelsMultiplier * 2}
       );
 
-var img = DrawingHelper.CreateImage(800,1000);
+
+
+
+var img = DrawingHelper.CreateImage(sz.WidthPixels(),sz.HeightPixels());
 
 using(var sfc = DrawingHelper.CreateSurface(img)){
 
       //set a global background color
-      sfc.Canvas.Clear(SKColors.White);
+      sfc.Canvas.Clear(SKColors.DarkGray);
 
       DrawingHelper.DrawShapes(sfc ,shapes);
 
-      DrawingHelper.DrawGrid(img,sfc, SKColors.Gray);
+      DrawingHelper.DrawGrid(img,sfc, SKColors.LightGray,1);
+      DrawingHelper.DrawGrid(img,sfc, SKColors.Black,12);
       
       DrawingHelper.WritePNG(sfc,"drawshapestest.png");    
 }

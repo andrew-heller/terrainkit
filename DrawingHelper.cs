@@ -103,14 +103,6 @@ public static void DrawShapes(SKSurface surface, List<Shape> shapes){
 
 public static void AddUShape(Shape shp, SKCanvas canvas, SKPaint tcolor){
 
-//bounding box for shape
-//turn single shage into 3 rects
-
-		var isHorizontal = shp.Width > shp.Height ? true : false;
-		
-		if(isHorizontal){
-
-		}
 
 		var Longside = new Shape(){
 			Width = shp.Width,
@@ -131,7 +123,8 @@ public static void AddUShape(Shape shp, SKCanvas canvas, SKPaint tcolor){
 			Type= ShapeType.box,
 			Width = Size.InchesToPixelsMultiplier,
 			Height = shp.Height,
-			position= new SKPoint(shp.position.X + shp.Width,shp.position.Y)
+			//subtract 1 for thikness of bar from left most position
+			position= new SKPoint(shp.position.X + shp.Width - Size.InchesToPixelsMultiplier,shp.position.Y)
 		};
 
 		AddBox(Longside,canvas,tcolor);
@@ -183,12 +176,27 @@ public static void AddLShape(Shape shp, SKCanvas canvas, SKPaint tcolor){
 
 public static void AddTShape(Shape shp, SKCanvas canvas, SKPaint tcolor){
 
-		AddBox(shp,canvas,tcolor);
-		var smallside = new Shape();
-		smallside.Width = Size.InchesToPixelsMultiplier;
-		smallside.Height = shp.Width;
-		smallside.position= new SKPoint( (shp.position.X + shp.Width/2 ) - Size.InchesToPixelsMultiplier/2,shp.position.Y);
-		AddBox(smallside,canvas,tcolor);
+
+		var Longside = new Shape(){
+			Width = shp.Width,
+			Height = Size.InchesToPixelsMultiplier,
+			Type = ShapeType.box,
+			position= shp.position
+
+		};
+
+		var smallsideLeft = new Shape(){
+			Type= ShapeType.box,
+			Width = Size.InchesToPixelsMultiplier,
+			Height = shp.Height,
+			position= new SKPoint( (shp.position.X + shp.Width/2 ) - Size.InchesToPixelsMultiplier/2,shp.position.Y)
+		};
+
+	
+
+		AddBox(Longside,canvas,tcolor);
+		AddBox(smallsideLeft,canvas,tcolor);
+
 
 }
 
@@ -214,7 +222,7 @@ public static SKImageInfo CreateImage(int width, int height)
             return info;
 }
     
-public static void DrawGrid(SKImageInfo info,SKSurface surface, SKColor color){
+public static void DrawGrid(SKImageInfo info,SKSurface surface, SKColor color, int scale){
 
 		var paint = new SKPaint
 						{
@@ -229,8 +237,7 @@ public static void DrawGrid(SKImageInfo info,SKSurface surface, SKColor color){
 			//draw grid
 			var origin = new SKPoint(0,0); //upperleft corner
 			var bottompoint = new SKPoint(0,info.Height);
-
-			for(int x = 0; x<= info.Width; x+=Size.InchesToPixelsMultiplier){
+			for(int x = 0; x<= info.Width; x+=(Size.InchesToPixelsMultiplier*scale) ){
 			
 				origin.X = x;
 				bottompoint.X = x;
@@ -242,7 +249,7 @@ public static void DrawGrid(SKImageInfo info,SKSurface surface, SKColor color){
 			origin.X=0;
 			bottompoint.X=info.Width;
 
-			for(int y = 0; y<= info.Height; y+=Size.InchesToPixelsMultiplier){
+			for(int y = 0; y<= info.Height; y+=(Size.InchesToPixelsMultiplier*scale)){
 			
 				origin.Y = y;
 				bottompoint.Y = y;
