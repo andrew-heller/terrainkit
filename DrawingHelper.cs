@@ -22,23 +22,26 @@ public static SKSurface CreateSurface(SKImageInfo info){
 
 public static void DrawShapes(SKSurface surface, List<Shape> shapes){
 
-		// the the canvas and properties
 		var canvas = surface.Canvas;
-
-		// make sure the canvas is blank
-		//canvas.Clear(SKColors.White);
-
-		//draw a inch grid
 	
 		var boxcolor = new SKPaint(){
-			Color = SKColors.Red
+			Color = SKColors.Pink
 		};
 		var tcolor= new SKPaint(){
-			Color= SKColors.Cornsilk
+			Color= SKColors.BlueViolet
 		};
 
 		var linecolor = new SKPaint(){
 			Color = SKColors.Blue
+
+		};
+		var ucolor = new SKPaint(){
+			Color = SKColors.SeaGreen
+
+		};
+
+		var lcolor = new SKPaint(){
+			Color = SKColors.Chocolate
 
 		};
 
@@ -48,33 +51,29 @@ public static void DrawShapes(SKSurface surface, List<Shape> shapes){
 
 			case ShapeType.line:
 
-			var endpt = new SKPoint(shp.position.X + shp.Width, shp.position.Y + shp.Height);
+				var endpt = new SKPoint(shp.position.X + shp.Width, shp.position.Y + shp.Height);
 
-			 canvas.DrawLine(shp.position,endpt,linecolor);
-			break;
+			 	canvas.DrawLine(shp.position,endpt,linecolor);
+
+				break;
 			case ShapeType.box: //is a line
-			//get point
-			//create path
-			AddRect(shp,canvas,boxcolor);
-			
-		
-				
-			break;
+				AddBox(shp,canvas,boxcolor);
+				break;
 
 			case ShapeType.t_shape:
 
-			AddRect(shp,canvas,tcolor);
-			var smallside = new Shape();
-			smallside.Width = Size.InchesToPixelsMultiplier;
-			smallside.Height = shp.Width;
-			smallside.position= new SKPoint( (shp.position.X + shp.Width/2 ) - Size.InchesToPixelsMultiplier/2,shp.position.Y);
-			AddRect(smallside,canvas,tcolor);
+				AddTShape(shp,canvas,tcolor);
+				break;
 
+			case ShapeType.l_shape:
 
+				AddLShape(shp,canvas,lcolor);
+				break;
+			case ShapeType.u_shape:
 
+				AddUShape(shp,canvas,ucolor);
+				break;
 
-		
-			break;
 			default:
 			//show text?
 			break;
@@ -101,7 +100,99 @@ public static void DrawShapes(SKSurface surface, List<Shape> shapes){
 				
 			}
 
-public static void AddRect(Shape shp,SKCanvas canvas,SKPaint boxcolor){
+
+public static void AddUShape(Shape shp, SKCanvas canvas, SKPaint tcolor){
+
+//bounding box for shape
+//turn single shage into 3 rects
+
+		var isHorizontal = shp.Width > shp.Height ? true : false;
+		
+		if(isHorizontal){
+
+		}
+
+		var Longside = new Shape(){
+			Width = shp.Width,
+			Height = Size.InchesToPixelsMultiplier,
+			Type = ShapeType.box,
+			position= shp.position
+
+		};
+
+		var smallsideLeft = new Shape(){
+			Type= ShapeType.box,
+			Width = Size.InchesToPixelsMultiplier,
+			Height = shp.Height,
+			position= new SKPoint(shp.position.X,shp.position.Y)
+		};
+
+		var smallsideRight = new Shape(){
+			Type= ShapeType.box,
+			Width = Size.InchesToPixelsMultiplier,
+			Height = shp.Height,
+			position= new SKPoint(shp.position.X + shp.Width,shp.position.Y)
+		};
+
+		AddBox(Longside,canvas,tcolor);
+		AddBox(smallsideLeft,canvas,tcolor);
+		AddBox(smallsideRight,canvas,tcolor);
+
+
+
+
+}
+
+public static void AddLShape(Shape shp, SKCanvas canvas, SKPaint tcolor){
+
+//bounding box for shape
+//turn single shage into 3 rects
+
+		var isHorizontal = shp.Width > shp.Height ? true : false;
+		
+		if(isHorizontal){
+
+		}
+
+		var Longside = new Shape(){
+			Width = shp.Width,
+			Height = Size.InchesToPixelsMultiplier,
+			Type = ShapeType.box,
+			position= shp.position
+
+		};
+
+		var smallsideLeft = new Shape(){
+			Type= ShapeType.box,
+			Width = Size.InchesToPixelsMultiplier,
+			Height = shp.Height,
+			position= new SKPoint(shp.position.X,shp.position.Y)
+		};
+
+	
+
+		AddBox(Longside,canvas,tcolor);
+		AddBox(smallsideLeft,canvas,tcolor);
+		
+
+
+
+
+}
+
+
+public static void AddTShape(Shape shp, SKCanvas canvas, SKPaint tcolor){
+
+		AddBox(shp,canvas,tcolor);
+		var smallside = new Shape();
+		smallside.Width = Size.InchesToPixelsMultiplier;
+		smallside.Height = shp.Width;
+		smallside.position= new SKPoint( (shp.position.X + shp.Width/2 ) - Size.InchesToPixelsMultiplier/2,shp.position.Y);
+		AddBox(smallside,canvas,tcolor);
+
+}
+
+public static void AddBox(Shape shp,SKCanvas canvas,SKPaint boxcolor){
 	var pth = new SKPath();
 			var rec = new SKRect();
 				rec.Top = shp.position.Y;

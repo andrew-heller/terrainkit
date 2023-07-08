@@ -45,22 +45,20 @@ var sz = new Size(){
 };
 
 
-
-
 var shapes = new List<Shape>();
 
 shapes.Add(new Shape(){
       Type= ShapeType.box,
       position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 1,Size.InchesToPixelsMultiplier * 1),
-      Width = Size.InchesToPixelsMultiplier * 4,
-      Height= Size.InchesToPixelsMultiplier * 1}
+      Width = Size.InchesToPixelsMultiplier * 8,
+      Height= Size.InchesToPixelsMultiplier * 4}
       );
 
 shapes.Add(new Shape(){
       Type= ShapeType.box,
       position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 1,Size.InchesToPixelsMultiplier * 6),
-      Width = Size.InchesToPixelsMultiplier * 1,
-      Height=Size.InchesToPixelsMultiplier * 4}
+      Width = Size.InchesToPixelsMultiplier * 8,
+      Height=Size.InchesToPixelsMultiplier * 12}
       );
 
 
@@ -72,18 +70,33 @@ shapes.Add(new Shape(){
       Height= Size.InchesToPixelsMultiplier * 1}
       );
 
+shapes.Add(new Shape(){
+      Type= ShapeType.u_shape,
+      //start point
+      position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 15,Size.InchesToPixelsMultiplier * 1),
+      Width = Size.InchesToPixelsMultiplier * 4,
+      Height= Size.InchesToPixelsMultiplier * 9}
+      );
 
-var img = DrawingHelper.CreateImage(400,800);
+      shapes.Add(new Shape(){
+      Type= ShapeType.l_shape,
+      //start point
+      position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 6,Size.InchesToPixelsMultiplier * 10),
+      Width = Size.InchesToPixelsMultiplier * 6,
+      Height= Size.InchesToPixelsMultiplier * 2}
+      );
+
+var img = DrawingHelper.CreateImage(800,1000);
 
 using(var sfc = DrawingHelper.CreateSurface(img)){
 
       //set a global background color
       sfc.Canvas.Clear(SKColors.White);
 
-      DrawingHelper.DrawGrid(img,sfc, SKColors.Gray);
-      
       DrawingHelper.DrawShapes(sfc ,shapes);
 
+      DrawingHelper.DrawGrid(img,sfc, SKColors.Gray);
+      
       DrawingHelper.WritePNG(sfc,"drawshapestest.png");    
 }
 
