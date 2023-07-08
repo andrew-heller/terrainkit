@@ -2,16 +2,19 @@
 
 
 public class Size{
+    
+    public const int InchesToPixelsMultiplier = 40;
+
     public int Width { get; set; }
     public int Depth {get;set;}
      public int Height {get;set;}
 
      public int WidthPixels(){
-		return  Width * 100;
+		return  Width * InchesToPixelsMultiplier;
 	 } 
 
      public int HeightPixels(){
-		return  Height * 100;
+		return  Height * InchesToPixelsMultiplier;
 	 } 
      
 }

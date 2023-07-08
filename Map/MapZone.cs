@@ -1,6 +1,4 @@
 
-
-
 // classes are REFERENCE TYPES, numbers etc are Value Types
 
 public class MapZone {
@@ -11,6 +9,9 @@ public class MapZone {
     Terrain = new List<Terrain>();
 
 }
+
+public MapLocation Location {get;set;}
+
 
 public ZoneType ZoneType {get;set;}
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+
 // See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, Terrain Kit!");
 
@@ -8,9 +9,12 @@ var MyMap = new Map();
 
 MyMap.Description ="MY FIRST TEST MAP";
 MyMap.Name="Test";
+MyMap.Size.Width= 48; //inchecs
+MyMap.Size.Height = 36;
 
 MyMap.Zones.Add(new MapZone(){
       ZoneType = ZoneType.Deployment
+      
 }
 );
 

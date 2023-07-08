@@ -36,8 +36,13 @@ public class Map{
 
     }
 
+
+
+
     public void ExportMapPNG(string filename){
 
+
+//define image size
      var info = new SKImageInfo(Size.WidthPixels(), Size.HeightPixels());
 			using (var surface = SKSurface.Create(info))
 			{
@@ -47,8 +52,11 @@ public class Map{
 				// make sure the canvas is blank
 				canvas.Clear(SKColors.White);
 
-				// draw some text
-				var paint = new SKPaint
+				//draw a inch grid
+				ImageDrawGrid(info,canvas,SKColors.Green);
+				
+// draw some text
+var paint = new SKPaint
 				{
 					Color = SKColors.Black,
 					IsAntialias = true,
@@ -57,7 +65,9 @@ public class Map{
 					TextSize = 24
 				};
 				var coord = new SKPoint(info.Width / 2, (info.Height + paint.TextSize) / 2);
-				canvas.DrawText("SkiaSharp", coord, paint);
+				//draw text
+				canvas.DrawText(this.Description, coord, paint);
+
 
 				// save the file
 				using (var image = surface.Snapshot())
@@ -69,6 +79,40 @@ public class Map{
 			}
 		}
     
-    
+    public void ImageDrawGrid(SKImageInfo info,SKCanvas canvas, SKColor color){
+
+var paint = new SKPaint
+				{
+					Color = color,
+					IsAntialias = true,
+					Style = SKPaintStyle.Fill,
+					TextAlign = SKTextAlign.Center,
+					TextSize = 24
+				};
+
+				
+				//draw grid
+				var origin = new SKPoint(0,0); //upperleft corner
+				var bottompoint = new SKPoint(0,info.Height);
+				for(int x = 0; x<= info.Width; x+=Size.InchesToPixelsMultiplier){
+				
+					origin.X = x;
+					bottompoint.X = x;
+
+					canvas.DrawLine(origin,bottompoint,paint);
+
+				}
+				//reset back to zero
+				origin.X=0;
+				bottompoint.X=info.Width;
+				for(int y = 0; y<= info.Height; y+=Size.InchesToPixelsMultiplier){
+				
+					origin.Y = y;
+					bottompoint.Y = y;
+
+					canvas.DrawLine(origin,bottompoint,paint);
+
+				}
+	}
 }
 
