@@ -51,42 +51,92 @@ shapes.Add(new Shape(){
       Type= ShapeType.box,
       position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 1,Size.InchesToPixelsMultiplier * 1),
       Width = Size.InchesToPixelsMultiplier * 8,
-      Height= Size.InchesToPixelsMultiplier * 4}
+      Height= Size.InchesToPixelsMultiplier * 4,
+      BorderBottom=true,
+      BorderLeft=true,
+      BorderRight=true,
+      BorderTop=true}
       );
 
 shapes.Add(new Shape(){
-      Type= ShapeType.box,
+      Type= ShapeType.borders,
       position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 1,Size.InchesToPixelsMultiplier * 6),
       Width = Size.InchesToPixelsMultiplier * 8,
-      Height=Size.InchesToPixelsMultiplier * 12}
+      Height=Size.InchesToPixelsMultiplier * 12,
+        BorderBottom=true,
+      BorderLeft=true,
+      BorderRight=true,
+      BorderTop=true}
       );
 
 
 shapes.Add(new Shape(){
-      Type= ShapeType.t_shape,
+      Type= ShapeType.borders,
       //start point
       position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 1,Size.InchesToPixelsMultiplier * 9),
       Width = Size.InchesToPixelsMultiplier * 4,
-      Height= Size.InchesToPixelsMultiplier * 7}
+      Height= Size.InchesToPixelsMultiplier * 7,
+      BorderTop=true, MidVertical=true}
       );
 
 shapes.Add(new Shape(){
-      Type= ShapeType.u_shape,
+      Type= ShapeType.borders,
       //start point
       position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 15,Size.InchesToPixelsMultiplier * 1),
       Width = Size.InchesToPixelsMultiplier * 3,
-      Height= Size.InchesToPixelsMultiplier * 9}
+      Height= Size.InchesToPixelsMultiplier * 9,
+      BorderLeft=true,BorderRight=true,BorderTop=true
+      }
       );
 
       shapes.Add(new Shape(){
-      Type= ShapeType.l_shape,
+      Type= ShapeType.borders,
       //start point
       position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 6,Size.InchesToPixelsMultiplier * 10),
       Width = Size.InchesToPixelsMultiplier * 6,
-      Height= Size.InchesToPixelsMultiplier * 2}
+      Height= Size.InchesToPixelsMultiplier * 2,
+      BorderLeft=true, BorderTop=true}
       );
 
+  shapes.Add(new Shape(){
+      Type= ShapeType.borders,
+      //start point
+      position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 15,Size.InchesToPixelsMultiplier * 15),
+      Width = Size.InchesToPixelsMultiplier * 6,
+      Height= Size.InchesToPixelsMultiplier * 6,
+      BorderTop=true,
+      BorderRight=true,
+      BorderBottom=true,
+      BorderLeft=true,
+      MidHorizonal=true,
+      MidVertical=true}
+      );
 
+      shapes.Add(new Shape(){
+      Type= ShapeType.borders,
+      //start point
+      position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 15,Size.InchesToPixelsMultiplier * 27),
+      Width = Size.InchesToPixelsMultiplier * 6,
+      Height= Size.InchesToPixelsMultiplier * 6,
+      BorderTop=true,
+      BorderRight=true,
+      BorderBottom=true,
+      BorderLeft=true
+      //MidHorizonal=true,
+      //MidVertical=true
+      }
+      );
+
+       shapes.Add(new Shape(){
+      Type= ShapeType.borders,
+      //start point
+      position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 15,Size.InchesToPixelsMultiplier * 39),
+      Width = Size.InchesToPixelsMultiplier * 6,
+      Height= Size.InchesToPixelsMultiplier * 6,
+
+      MidHorizonal=true,
+      MidVertical=true
+      });
 
 
 var img = DrawingHelper.CreateImage(sz.WidthPixels(),sz.HeightPixels());

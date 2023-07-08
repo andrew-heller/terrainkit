@@ -7,6 +7,7 @@ public enum ShapeType {
     line,
     t_shape,
     u_shape,
-    l_shape
+    l_shape,
+    borders
 }
 

@@ -27,6 +27,9 @@ public static void DrawShapes(SKSurface surface, List<Shape> shapes){
 		var boxcolor = new SKPaint(){
 			Color = SKColors.Pink
 		};
+		var bcolor = new SKPaint(){
+			Color = SKColors.Orange
+		};
 		var tcolor= new SKPaint(){
 			Color= SKColors.BlueViolet
 		};
@@ -72,6 +75,10 @@ public static void DrawShapes(SKSurface surface, List<Shape> shapes){
 			case ShapeType.u_shape:
 
 				AddUShape(shp,canvas,ucolor);
+				break;
+			case ShapeType.borders:
+
+				AddBorders(shp,canvas,bcolor);
 				break;
 
 			default:
@@ -222,6 +229,75 @@ public static SKImageInfo CreateImage(int width, int height)
             return info;
 }
     
+public static void AddBorders(Shape shp, SKCanvas canvas, SKPaint tcolor){
+
+		//top
+		if(shp.BorderTop){
+				AddBox(new Shape(){
+					Width = shp.Width,
+					Height = Size.InchesToPixelsMultiplier,
+					Type = ShapeType.box,
+					position= shp.position
+
+				}, canvas, tcolor);
+		}
+
+		//bottom
+		if(shp.BorderBottom){
+				AddBox(new Shape(){
+					Width = shp.Width,
+					Height = Size.InchesToPixelsMultiplier,
+					Type = ShapeType.box,
+					position= new SKPoint(shp.position.X,shp.position.Y + shp.Height - Size.InchesToPixelsMultiplier)
+				},
+				canvas, tcolor);
+		}
+		//left
+		if(shp.BorderLeft){
+				AddBox( new Shape(){
+					Type= ShapeType.box,
+					Width = Size.InchesToPixelsMultiplier,
+					Height = shp.Height,
+					position= new SKPoint(shp.position.X,shp.position.Y)
+				},
+				canvas, tcolor);
+		}
+		//right border
+		if(shp.BorderRight){
+				AddBox( new Shape(){
+					Type= ShapeType.box,
+					Width = Size.InchesToPixelsMultiplier,
+					Height = shp.Height,
+					//subtract 1 for thikness of bar from left most position
+					position= new SKPoint(shp.position.X + shp.Width - Size.InchesToPixelsMultiplier,shp.position.Y)
+				},
+				canvas, tcolor);
+		}
+
+
+		if(shp.MidVertical){
+				AddBox(  new Shape(){
+					Type= ShapeType.box,
+					Width = Size.InchesToPixelsMultiplier,
+					Height = shp.Height,
+					position= new SKPoint( (shp.position.X + shp.Width/2 ) - Size.InchesToPixelsMultiplier/2,shp.position.Y)
+				},
+				canvas,tcolor);
+		}
+
+		if(shp.MidHorizonal){
+				AddBox(  new Shape(){
+					Type= ShapeType.box,
+					Height = Size.InchesToPixelsMultiplier,
+					Width = shp.Width,
+					position= new SKPoint( shp.position.X,(shp.position.Y + shp.Height/2 )- Size.InchesToPixelsMultiplier/2)
+				},
+				canvas,tcolor);
+
+		}
+}
+
+
 public static void DrawGrid(SKImageInfo info,SKSurface surface, SKColor color, int scale){
 
 		var paint = new SKPaint
