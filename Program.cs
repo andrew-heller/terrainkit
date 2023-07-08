@@ -27,6 +27,8 @@ MyMap.Zones.Add(new MapZone(){
 
 Console.WriteLine($"Map \"{MyMap.Name}\" has {MyMap.Zones.Count} zones");
 
+MyMap.ExportMapPNG("mymap.png");
+
 
 //create a place to store a bunch of terrain objects
 var TerrainList = new List<Terrain>();

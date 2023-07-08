@@ -7,4 +7,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+  <!-- <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" /> -->
+  <PackageReference Include="SkiaSharp" Version="2.88.4-preview.84" />
+  </ItemGroup>
+
+<!-- 
+<configuration>
+  <packageSources>
+    <add key="nuget.org" value="https://www.nuget.org/v3/index.json" />
+  </packageSources> 
+</configuration>
+-->
 </Project>
