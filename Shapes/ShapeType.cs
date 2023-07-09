@@ -8,6 +8,7 @@ public enum ShapeType {
     t_shape,
     u_shape,
     l_shape,
-    borders
+    borders,
+    Circle
 }
 

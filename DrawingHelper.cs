@@ -47,10 +47,27 @@ public static void DrawShapes(SKSurface surface, List<Shape> shapes){
 			Color = SKColors.Chocolate
 
 		};
+		var circlecolor = new SKPaint(){
+			Color = SKColors.Black,
+			 Style= SKPaintStyle.Stroke
+
+		};
 
 		foreach(var shp in shapes){
 
 		switch(shp.Type){
+			case ShapeType.Circle:
+			//var endpt = new SKPoint(shp.position.X + shp.Width, shp.position.Y + shp.Height);
+/*
+
+
+
+
+
+ihih8y
+*/
+			 	canvas.DrawCircle(shp.position.X,shp.position.Y,10,circlecolor);
+				break;
 
 			case ShapeType.line:
 

@@ -8,6 +8,30 @@ Console.WriteLine("Hello, Terrain Kit!");
  
 var MyMap = new Map();
 
+MyMap.Card = new MapCard();
+MyMap.Card.DropZone = DropZoneType.top__bottom_full;
+MyMap.Card.ID="Hammer";
+MyMap.Card.Objectives= new List<MapLocation>{
+      new MapLocation(){
+             X=0,Y=0
+      },
+      new MapLocation(){
+            X=0,Y=20
+
+      },
+      new MapLocation(){
+            X=-16,Y=0
+      },
+      new MapLocation(){
+            X=16,Y=0
+      },
+      new MapLocation(){
+            X=0,Y=-20
+      }
+
+
+};
+
 MyMap.Description ="MY FIRST TEST MAP";
 MyMap.Name="Test";
 MyMap.Size.Width= 48; //inchecs
@@ -138,17 +162,23 @@ shapes.Add(new Shape(){
       MidVertical=true
       });
 
+ shapes.Add(new Shape(){
+      Type= ShapeType.Circle,
+      //start point
+      position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 20,Size.InchesToPixelsMultiplier * 10),
 
+      });
 var img = DrawingHelper.CreateImage(sz.WidthPixels(),sz.HeightPixels());
 
 using(var sfc = DrawingHelper.CreateSurface(img)){
 
       //set a global background color
-      sfc.Canvas.Clear(SKColors.DarkGray);
+      sfc.Canvas.Clear(SKColors.WhiteSmoke);
 
       DrawingHelper.DrawShapes(sfc ,shapes);
 
       DrawingHelper.DrawGrid(img,sfc, SKColors.LightGray,1);
+      DrawingHelper.DrawGrid(img,sfc, SKColors.Gray,6);
       DrawingHelper.DrawGrid(img,sfc, SKColors.Black,12);
       
       DrawingHelper.WritePNG(sfc,"drawshapestest.png");    

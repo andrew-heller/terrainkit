@@ -4,6 +4,37 @@
 
 using SkiaSharp;
 
+
+public enum DropZoneType{
+	top__bottom_full,
+	top_bottom_half,
+	diagonal_corners
+}
+
+// settings passed to MAP to be used to build it...
+public class MapCard{
+	
+	public string ID {get;set;}
+	//configure the dropzones
+	public DropZoneType DropZone {get;set;}
+
+	//configure the objectives
+	public List<MapLocation> Objectives {get;set;}
+
+	//0 to 100, 0 = no terrain, 100 is entire map has terrain
+	public int TerrainDensity {get;set;}
+
+	//terrian type weights
+
+
+}
+public class ObjectivePosition{
+	
+	public MapLocation OffsetFromCenter {get;set;}
+}
+
+
+
 public class Map{
 
     
@@ -19,6 +50,9 @@ public class Map{
             };
 
     }
+
+	public MapCard Card {get;set;}
+
     public List<MapZone> Zones {get;set;}
 
 	//used as filename for export
