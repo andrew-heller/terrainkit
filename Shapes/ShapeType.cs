@@ -5,7 +5,7 @@
 public enum ShapeType {
     box,
     line,
-    t_shape,
+    triangle,
     u_shape,
     l_shape,
     borders,

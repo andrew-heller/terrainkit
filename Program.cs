@@ -162,11 +162,28 @@ shapes.Add(new Shape(){
       MidVertical=true
       });
 
+       shapes.Add(new Shape(){
+      Type= ShapeType.triangle,
+      //start point
+      position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 15,Size.InchesToPixelsMultiplier * 45),
+      Width = Size.InchesToPixelsMultiplier * 6,
+      Height= Size.InchesToPixelsMultiplier * 6,
+      });
+
  shapes.Add(new Shape(){
       Type= ShapeType.Circle,
       //start point
       position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 20,Size.InchesToPixelsMultiplier * 10),
 
+      });
+
+      
+ shapes.Add(new Shape(){
+      Type= ShapeType.triangle,
+      //start point
+      position = new SkiaSharp.SKPoint(Size.InchesToPixelsMultiplier * 20,Size.InchesToPixelsMultiplier * 10),
+Width = Size.InchesToPixelsMultiplier * 3,
+Height=Size.InchesToPixelsMultiplier * 2
       });
 var img = DrawingHelper.CreateImage(sz.WidthPixels(),sz.HeightPixels());
 

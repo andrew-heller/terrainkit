@@ -30,12 +30,19 @@ public static void DrawShapes(SKSurface surface, List<Shape> shapes){
 		var bcolor = new SKPaint(){
 			Color = SKColors.Orange
 		};
+
 		var tcolor= new SKPaint(){
-			Color= SKColors.BlueViolet
+			Color= SKColors.BlueViolet,
+			IsAntialias=true,
+			 Style= SKPaintStyle.StrokeAndFill,
+			 StrokeWidth = 4,
+			 StrokeJoin = SKStrokeJoin.Miter
 		};
 
 		var linecolor = new SKPaint(){
-			Color = SKColors.Blue
+			Color = SKColors.Blue,
+			Style= SKPaintStyle.Stroke,
+			
 
 		};
 		var ucolor = new SKPaint(){
@@ -44,12 +51,15 @@ public static void DrawShapes(SKSurface surface, List<Shape> shapes){
 		};
 
 		var lcolor = new SKPaint(){
-			Color = SKColors.Chocolate
+			Color = SKColors.Chocolate,
+			IsAntialias=true,
 
 		};
 		var circlecolor = new SKPaint(){
 			Color = SKColors.Black,
-			 Style= SKPaintStyle.Stroke
+			 Style= SKPaintStyle.Stroke,
+			 StrokeWidth= 4
+
 
 		};
 
@@ -80,9 +90,9 @@ ihih8y
 				AddBox(shp,canvas,boxcolor);
 				break;
 
-			case ShapeType.t_shape:
+			case ShapeType.triangle:
 
-				AddTShape(shp,canvas,tcolor);
+				AddTriangle(shp,canvas,tcolor);
 				break;
 
 			case ShapeType.l_shape:
@@ -198,30 +208,16 @@ public static void AddLShape(Shape shp, SKCanvas canvas, SKPaint tcolor){
 }
 
 
-public static void AddTShape(Shape shp, SKCanvas canvas, SKPaint tcolor){
+public static void AddTriangle(Shape shp, SKCanvas canvas, SKPaint tcolor){
 
 
-		var Longside = new Shape(){
-			Width = shp.Width,
-			Height = Size.InchesToPixelsMultiplier,
-			Type = ShapeType.box,
-			position= shp.position
+	var path2 = new SKPath { FillType = SKPathFillType.EvenOdd };
+	path2.MoveTo(shp.position.X, shp.position.Y);
+	path2.LineTo(shp.position.X + shp.Width, shp.position.Y);
+	path2.LineTo(shp.position.X+ shp.Width,shp.position.Y + shp.Height);
+	path2.Close();
 
-		};
-
-		var smallsideLeft = new Shape(){
-			Type= ShapeType.box,
-			Width = Size.InchesToPixelsMultiplier,
-			Height = shp.Height,
-			position= new SKPoint( (shp.position.X + shp.Width/2 ) - Size.InchesToPixelsMultiplier/2,shp.position.Y)
-		};
-
-	
-
-		AddBox(Longside,canvas,tcolor);
-		AddBox(smallsideLeft,canvas,tcolor);
-
-
+	canvas.DrawPath(path2,tcolor);
 }
 
 public static void AddBox(Shape shp,SKCanvas canvas,SKPaint boxcolor){
