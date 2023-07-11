@@ -6,6 +6,7 @@ public class Shape {
    
     public ShapeType Type { get; set; }
 
+    public int PaintIndex{get;set;}
 
     public SkiaSharp.SKPoint position {get;set;}
 

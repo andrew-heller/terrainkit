@@ -4,7 +4,8 @@
 
 public enum ZoneType
 {
-    Deployment,
+    DeploymentA, 
+    DeploymentB,
     NoMansLand
 
 }

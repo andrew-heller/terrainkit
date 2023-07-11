@@ -20,92 +20,48 @@ public static SKSurface CreateSurface(SKImageInfo info){
 }
 
 
-public static void DrawShapes(SKSurface surface, List<Shape> shapes){
+public static void DrawShapes(SKSurface surface, List<Shape> shapes, List<SKPaint> paints){
 
 		var canvas = surface.Canvas;
 	
-		var boxcolor = new SKPaint(){
-			Color = SKColors.Pink
-		};
-		var bcolor = new SKPaint(){
-			Color = SKColors.Orange
-		};
-
-		var tcolor= new SKPaint(){
-			Color= SKColors.BlueViolet,
-			IsAntialias=true,
-			 Style= SKPaintStyle.StrokeAndFill,
-			 StrokeWidth = 4,
-			 StrokeJoin = SKStrokeJoin.Miter
-		};
-
-		var linecolor = new SKPaint(){
-			Color = SKColors.Blue,
-			Style= SKPaintStyle.Stroke,
-			
-
-		};
-		var ucolor = new SKPaint(){
-			Color = SKColors.SeaGreen
-
-		};
-
-		var lcolor = new SKPaint(){
-			Color = SKColors.Chocolate,
-			IsAntialias=true,
-
-		};
-		var circlecolor = new SKPaint(){
-			Color = SKColors.Black,
-			 Style= SKPaintStyle.Stroke,
-			 StrokeWidth= 4
-
-
-		};
-
 		foreach(var shp in shapes){
+
+
+var paintcolor = paints[shp.PaintIndex];
 
 		switch(shp.Type){
 			case ShapeType.Circle:
-			//var endpt = new SKPoint(shp.position.X + shp.Width, shp.position.Y + shp.Height);
-/*
-
-
-
-
-
-ihih8y
-*/
-			 	canvas.DrawCircle(shp.position.X,shp.position.Y,10,circlecolor);
+			
+			 	canvas.DrawCircle(shp.position.X,shp.position.Y,10,paintcolor);
 				break;
 
 			case ShapeType.line:
 
 				var endpt = new SKPoint(shp.position.X + shp.Width, shp.position.Y + shp.Height);
 
-			 	canvas.DrawLine(shp.position,endpt,linecolor);
+			 	canvas.DrawLine(shp.position,endpt,paintcolor);
 
 				break;
 			case ShapeType.box: //is a line
-				AddBox(shp,canvas,boxcolor);
+				AddBox(shp,canvas,paintcolor);
 				break;
 
 			case ShapeType.triangle:
 
-				AddTriangle(shp,canvas,tcolor);
+				AddTriangle(shp,canvas,paintcolor);
 				break;
 
 			case ShapeType.l_shape:
 
-				AddLShape(shp,canvas,lcolor);
+				AddLShape(shp,canvas,paintcolor);
 				break;
 			case ShapeType.u_shape:
 
-				AddUShape(shp,canvas,ucolor);
+				AddUShape(shp,canvas,paintcolor);
 				break;
 			case ShapeType.borders:
 
-				AddBorders(shp,canvas,bcolor);
+				AddBorders(shp,canvas,paintcolor);
 				break;
 
 			default:

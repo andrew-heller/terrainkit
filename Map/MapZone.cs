@@ -7,10 +7,11 @@ public class MapZone {
  public MapZone()
 {
     Terrain = new List<Terrain>();
+    Location = new Size();
 
 }
 
-public MapLocation Location {get;set;}
+public Size Location {get;set;}
 
 
 public ZoneType ZoneType {get;set;}
