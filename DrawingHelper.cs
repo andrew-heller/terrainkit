@@ -32,7 +32,7 @@ var paintcolor = paints[shp.PaintIndex];
 		switch(shp.Type){
 			case ShapeType.Circle:
 			
-			 	canvas.DrawCircle(shp.position.X,shp.position.Y,10,paintcolor);
+			 	canvas.DrawCircle(shp.position.X,shp.position.Y,shp.Width,paintcolor);
 				break;
 
 			case ShapeType.line:

@@ -17,7 +17,7 @@ public Size Location {get;set;}
 public ZoneType ZoneType {get;set;}
 
 // Optional
-public MapObjective? Objective   {get;set;}
+//public MapObjective? Objective   {get;set;}
 
 //terrain
 public List<Terrain> Terrain {get;set;}

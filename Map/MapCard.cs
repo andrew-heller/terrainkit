@@ -9,7 +9,7 @@ public class MapCard{
 	public DropZoneType DropZone {get;set;}
 
 	//configure the objectives
-	public List<MapLocation> Objectives {get;set;}
+	public List<MapObjective> Objectives {get;set;}
 
 	//0 to 100, 0 = no terrain, 100 is entire map has terrain
 	public int TerrainDensity {get;set;}
@@ -42,6 +42,7 @@ public  Map Build(Size mapsize){
     map.Zones.Add(dropzoneB);
     map.Zones.Add(nomanzone);
     
+	map.Objectives= this.Objectives;
 
 		//dropzone is 12 from center
 		if(DropZone == DropZoneType.top__bottom_full){
@@ -74,6 +75,7 @@ public  Map Build(Size mapsize){
 
 		}
 
+	
 	//
 
 	return map;

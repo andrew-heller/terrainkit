@@ -14,7 +14,7 @@ public class Map{
             Zones = new List<MapZone>();
             //default to 3x5
             Size = new Size(){
-                Width=36,
+                Width=48,
                 Height=48
             };
 
@@ -29,7 +29,7 @@ public class Map{
     public string? Description {get;set;}
 
     public Size Size {get;set;}
-
+    public List<MapObjective> Objectives { get; internal set; }
 
     public void ExportMapPNG(string filename){
 
@@ -43,7 +43,15 @@ public class Map{
 		},
              new SKPaint(){
 			Color = SKColors.White
-		}};
+		},
+             new SKPaint(){
+			Color = SKColors.Black, 
+            Style = SKPaintStyle.Stroke,
+            StrokeWidth=4
+		}
+        
+        
+        };
 
 
 		//convert map to shapes
@@ -63,6 +71,29 @@ public class Map{
 
                     );
         }
+
+        //add objectives to map
+
+        var center = new Size(){
+            X = this.Size.Width/2,
+            Y = this.Size.Height/2
+            
+        };
+
+    foreach (var obj in this.Objectives){
+                shapes.Add(new Shape(){
+                    Type= ShapeType.Circle,
+                    position = new SkiaSharp.SKPoint(center.XPixels() + obj.Offset.XPixels(),
+                    center.YPixels() + obj.Offset.YPixels()),
+                    Width = obj.Offset.Width,  //for circle this is in pixedl
+                    //Height= obj.Offset.HeightPixels(),
+                    PaintIndex = 3
+                    }
+
+
+                    );
+        }
+
 
         var img = DrawingHelper.CreateImage(Size.WidthPixels(), Size.HeightPixels());
 
